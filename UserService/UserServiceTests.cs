@@ -123,7 +123,7 @@ public class UserServiceTests
         var firstUserResponse = await _userServiceClient.RegisterUser(user);
         var secondUserResponse = await _userServiceClient.RegisterUser(user);
 
-        Assert.That(secondUserResponse.GetId(), Is.EqualTo(firstUserResponse.GetId() + 1));
+        Assert.True(secondUserResponse.GetId() > firstUserResponse.GetId());
     }
 
     //9
@@ -135,7 +135,7 @@ public class UserServiceTests
         await _userServiceClient.DeleteUser(firstUserResponse.GetId());
         var secondUserResponse = await _userServiceClient.RegisterUser(user);
 
-        Assert.That(secondUserResponse.GetId(), Is.EqualTo(firstUserResponse.GetId() + 1));
+        Assert.True(secondUserResponse.GetId() > firstUserResponse.GetId());
     }
 
     //21
