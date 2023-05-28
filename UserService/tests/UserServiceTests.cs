@@ -1,4 +1,3 @@
-using System.Dynamic;
 using System.Net;
 using NUnit.Framework;
 using UserService.builders;
@@ -7,12 +6,12 @@ using UserService.models.request;
 using static UserService.Extensions.HttpResponseMessageExtension;
 using static UserService.Utils.TestData;
 
-namespace UserService;
+namespace UserService.tests;
 
 [TestFixture]
 public class UserServiceTests
 {
-    private readonly UserServiceClient _userServiceClient = new UserServiceClient();
+    private readonly UserServiceClient _userServiceClient = UserServiceClient.Instance;
 
     RegisterUser user = new UserBuilder(new RegisterUser())
         .firstName("Jeanne")

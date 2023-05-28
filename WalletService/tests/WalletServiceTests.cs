@@ -10,13 +10,13 @@ using WalletService.models.request;
 using static UserService.Utils.TestData;
 
 
-namespace WalletService;
+namespace WalletService.tests;
 
 [TestFixture]
 public class WalletServiceTests
 {
     private WalletServiceClient _walletService = new WalletServiceClient();
-    private readonly UserServiceClient _userServiceClient = new UserServiceClient();
+    private readonly UserServiceClient _userServiceClient = UserServiceClient.Instance;
 
     RegisterUser user = new UserBuilder(new RegisterUser())
         .firstName("Jeanne")
