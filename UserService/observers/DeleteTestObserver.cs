@@ -1,4 +1,4 @@
-﻿namespace UserService.observers;
+﻿namespace UserService.Observers;
 
 public class DeleteTestObserver : BaseObserver, IObserver<string>
 {

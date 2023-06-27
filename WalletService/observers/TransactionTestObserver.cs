@@ -1,4 +1,4 @@
-﻿using UserService.observers;
+﻿using UserService.Observers;
 
 namespace WalletService.observers;
 

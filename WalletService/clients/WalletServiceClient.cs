@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using UserService.Clients;
-using WalletService.models.request;
+using WalletService.Models.Request;
 using WalletService.Utils;
 
 namespace WalletService.Clients;
@@ -37,7 +37,7 @@ public class WalletServiceClient : BaseClient,IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(httpRequestMessage);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in _observers)
+            foreach (var observer in observers)
             {
                 if (observer.Value.GetType().Name == "TestDataObserver")
                 {
@@ -64,19 +64,19 @@ public class WalletServiceClient : BaseClient,IObservable<string>
     
     public IDisposable Subscribe(IObserver<string> observer)
     {
-        _observers.TryAdd(observer.GetType().Name, observer);
+        observers.TryAdd(observer.GetType().Name, observer);
        
         return null;
     }
     
     public void Detach(IObserver<string> observer)
     {
-        _observers.Remove(observer.GetType().Name, out observer);
+        observers.Remove(observer.GetType().Name, out observer);
     }
     
     public void NotifyAllObservers(string id)
     {
-        foreach (var observer in _observers)
+        foreach (var observer in observers)
         {
             observer.Value.OnNext(id);
         }

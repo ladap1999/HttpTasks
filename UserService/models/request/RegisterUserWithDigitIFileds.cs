@@ -1,7 +1,7 @@
-﻿namespace UserService.models.request;
+﻿namespace UserService.Models.Request;
 
 public class RegisterUserWithDigitFields
 {
-    public int firstName;
-    public int lastName;
+    public int FirstName;
+    public int LastName;
 }

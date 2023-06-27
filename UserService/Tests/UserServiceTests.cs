@@ -1,12 +1,12 @@
 using System.Net;
 using NUnit.Framework;
-using UserService.builders;
+using UserService.Builders;
 using UserService.Clients;
-using UserService.models.request;
+using UserService.Models.Request;
 using static UserService.Extensions.HttpResponseMessageExtension;
 using static UserService.Utils.TestData;
 
-namespace UserService.tests;
+namespace UserService.Tests;
 
 [TestFixture]
 public class UserServiceTests
@@ -142,9 +142,9 @@ public class UserServiceTests
     public async Task UserService_DeleteNotExistingUser_StatusCodeIsInternalServerError()
     {
         var id = int.MaxValue;
-        var responseStatusCode = await _userServiceClient.DeleteUser(id);
+        var response = await _userServiceClient.DeleteUser(id);
 
-        Assert.That(responseStatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
     //22
@@ -153,9 +153,9 @@ public class UserServiceTests
     {
         var response = await _userServiceClient.RegisterUser(user);
 
-        var responseStatusCode = await _userServiceClient.DeleteUser(response.GetId());
+        var responseAfterDelete = await _userServiceClient.DeleteUser(response.GetId());
 
-        Assert.That(responseStatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(responseAfterDelete.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
     //10
@@ -188,11 +188,11 @@ public class UserServiceTests
         var response = await _userServiceClient.RegisterUser(user);
         await _userServiceClient.SetUserStatus(response.GetId(), true);
 
-        var responseUserStatusCodeForFalseStatus =
+        var responseUserForFalseStatus =
             await _userServiceClient.SetUserStatus(response.GetId(), false);
         var responseUserStatus = await _userServiceClient.GetUserStatus(response.GetId());
 
-        Assert.That(responseUserStatusCodeForFalseStatus, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(responseUserForFalseStatus.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         Assert.False(responseUserStatus.GetBoolValue());
     }
 
@@ -203,10 +203,10 @@ public class UserServiceTests
     {
         var response = await _userServiceClient.RegisterUser(user);
 
-        var responseUserStatusCode = await _userServiceClient.SetUserStatus(response.GetId(), true);
+        var responseUser = await _userServiceClient.SetUserStatus(response.GetId(), true);
         var responseUserStatus = await _userServiceClient.GetUserStatus(response.GetId());
 
-        Assert.That(responseUserStatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(responseUser.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         Assert.True(responseUserStatus.GetBoolValue());
     }
 
@@ -216,9 +216,9 @@ public class UserServiceTests
     public async Task UserService_SetStatusNonExistentUser_StatusCodeIsNotFound()
     {
         var nonExistingId = int.MaxValue;
-        var responseStatusCode = await _userServiceClient.SetUserStatus(nonExistingId, true);
+        var response = await _userServiceClient.SetUserStatus(nonExistingId, true);
 
-        Assert.That(responseStatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
     }
 
     //19
@@ -228,11 +228,11 @@ public class UserServiceTests
         var response = await _userServiceClient.RegisterUser(user);
         await _userServiceClient.SetUserStatus(response.GetId(), true);
 
-        var responseUserStatusCodeForTrueStatus =
+        var responseUserForTrueStatus =
             await _userServiceClient.SetUserStatus(response.GetId(), true);
         var responseUserStatus = await _userServiceClient.GetUserStatus(response.GetId());
 
-        Assert.That(responseUserStatusCodeForTrueStatus, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(responseUserForTrueStatus.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         Assert.True(responseUserStatus.GetBoolValue());
     }
 }

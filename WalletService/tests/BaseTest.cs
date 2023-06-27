@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using UserService.Clients;
-using UserService.observers;
+using UserService.Observers;
 using WalletService.Clients;
 using WalletService.observers;
 
-namespace WalletService.tests;
+namespace WalletService.Tests;
 [SetUpFixture]
 public class BaseTest
 {
