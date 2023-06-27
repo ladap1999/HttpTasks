@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using UserService.Clients;
-using UserService.observers;
+using UserService.Observers;
 
-namespace UserService.tests;
+namespace UserService.Tests;
 [SetUpFixture]
 public class BaseTest
 {

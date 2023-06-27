@@ -1,6 +1,6 @@
-﻿using UserService.models.request;
+﻿using UserService.Models.Request;
 
-namespace UserService.builders;
+namespace UserService.Builders;
 
 public class UserWithDigitFieldsBuilder
 {
@@ -13,13 +13,13 @@ public class UserWithDigitFieldsBuilder
 
     public UserWithDigitFieldsBuilder firstName(int name)
     {
-        _userWithDigitRequestModel.firstName = name;
+        _userWithDigitRequestModel.FirstName = name;
         return this;
     }
 
     public UserWithDigitFieldsBuilder lastName(int lastName)
     {
-        _userWithDigitRequestModel.lastName = lastName;
+        _userWithDigitRequestModel.LastName = lastName;
         return this;
     }
 

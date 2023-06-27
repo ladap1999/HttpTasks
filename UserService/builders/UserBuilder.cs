@@ -1,6 +1,6 @@
-﻿using UserService.models.request;
+﻿using UserService.Models.Request;
 
-namespace UserService.builders;
+namespace UserService.Builders;
 
 public class UserBuilder
 {
@@ -13,13 +13,13 @@ public class UserBuilder
 
     public UserBuilder firstName(string name)
     {
-        _userRequestModel.firstName = name;
+        _userRequestModel.FirstName = name;
         return this;
     }
 
     public UserBuilder lastName(string lastName)
     {
-        _userRequestModel.lastName = lastName;
+        _userRequestModel.LastName = lastName;
         return this;
     }
 

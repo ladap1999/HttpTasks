@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Net;
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json;
 using UserService.Extensions;
 using UserService.Utils;
@@ -25,7 +23,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(httpRequestMessage);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in _observers)
+            foreach (var observer in observers)
             {
                 if (observer.Value.GetType().Name == "DeleteTestObserver")
                 {
@@ -46,7 +44,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         return response;
     }
 
-    public async Task<HttpStatusCode> DeleteUser(int id)
+    public async Task<HttpResponseMessage> DeleteUser(int id)
     {
         var deleteUserRequest = new HttpRequestMessage
         {
@@ -57,7 +55,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(deleteUserRequest);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in _observers)
+            foreach (var observer in observers)
             {
                 if (observer.Value.GetType().Name == "TestDataObserver")
                 {
@@ -74,7 +72,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
                 }
             }
         }
-        return response.StatusCode;
+        return response;
     }
 
     public async Task<HttpResponseMessage> GetUserStatus(int id)
@@ -89,7 +87,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         return response;
     }
 
-    public async Task<HttpStatusCode> SetUserStatus(int id, bool isActive)
+    public async Task<HttpResponseMessage> SetUserStatus(int id, bool isActive)
     {
         var setUserStatusRequest = new HttpRequestMessage
         {
@@ -98,24 +96,24 @@ public class UserServiceClient : BaseClient, IObservable<string>
         };
 
         HttpResponseMessage response = await _client.SendAsync(setUserStatusRequest);
-        return response.StatusCode;
+        return response;
     }
 
     public IDisposable Subscribe(IObserver<string> observer)
     {
-       _observers.TryAdd(observer.GetType().Name, observer);
+       observers.TryAdd(observer.GetType().Name, observer);
        
        return null;
     }
     
     public void Detach(IObserver<string> observer)
     {
-       _observers.Remove(observer.GetType().Name, out observer);
+       observers.Remove(observer.GetType().Name, out observer);
     }
     
     public void NotifyAllObservers(string id)
     {
-        foreach (var observer in _observers)
+        foreach (var observer in observers)
         {
             observer.Value.OnNext(id);
         }

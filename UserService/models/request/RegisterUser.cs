@@ -1,7 +1,7 @@
-﻿namespace UserService.models.request;
+﻿namespace UserService.Models.Request;
 
 public class RegisterUser
 {
-    public string firstName;
-    public string lastName;
+    public string FirstName;
+    public string LastName;
 }

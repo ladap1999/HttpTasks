@@ -1,6 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿
 
-namespace UserService.observers;
+namespace UserService.Observers;
 
 public class TestDataObserver : BaseObserver, IObserver<string>
 {

@@ -1,12 +1,12 @@
 using System.Net;
 using NUnit.Framework;
-using UserService.builders;
+using UserService.Builders;
 using UserService.Clients;
 using UserService.Extensions;
-using UserService.models.request;
-using WalletService.builders;
+using UserService.Models.Request;
+using WalletService.Builders;
 using WalletService.Clients;
-using WalletService.models.request;
+using WalletService.Models.Request;
 using static UserService.Utils.TestData;
 
 

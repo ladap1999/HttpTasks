@@ -1,6 +1,6 @@
-﻿using WalletService.models.request;
+﻿using WalletService.Models.Request;
 
-namespace WalletService.builders;
+namespace WalletService.Builders;
 
 public class ChargeBuilder
 {

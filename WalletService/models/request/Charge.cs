@@ -1,4 +1,4 @@
-﻿namespace WalletService.models.request;
+﻿namespace WalletService.Models.Request;
 
 public class Charge
 {
