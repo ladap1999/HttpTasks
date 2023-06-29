@@ -7,7 +7,7 @@ using UserService.Observers;
 namespace UserService.DI
 {
     [Binding]
-    internal class SetUp
+    internal class SetUpFixture
     {
         private static IContainer _container;
 
@@ -34,7 +34,6 @@ namespace UserService.DI
         {
             var tasks = _container.Resolve<TestDataObserver>().GetAllIds()
                 .Select(id => _container.Resolve<UserServiceClient>().DeleteUser(Convert.ToInt32(id.Value)));
-
             await Task.WhenAll(tasks);
         }
     }

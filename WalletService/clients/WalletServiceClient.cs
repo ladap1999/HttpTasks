@@ -9,10 +9,6 @@ namespace WalletService.Clients;
 public class WalletServiceClient : BaseClient, IObservable<string>
 {
     private readonly HttpClient _client = new HttpClient();
-    /*private static  readonly Lazy<WalletServiceClient> _instance = new Lazy<WalletServiceClient>(() => new WalletServiceClient());
-    
-    public static WalletServiceClient Instance => _instance.Value;
-   // private WalletServiceClient _walletService;*/
 
     public async Task<HttpResponseMessage> GetBalance(int id)
     {
@@ -38,12 +34,12 @@ public class WalletServiceClient : BaseClient, IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(httpRequestMessage);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in observers)
+            foreach (var observer in Observers)
             {
                 if (observer.Value.GetType().Name == "TestDataObserver")
                 {
                     Detach(observer.Value);
-                    NotifyAllObservers(Convert.ToString(request.userId));
+                    NotifyAllObservers(Convert.ToString(request.UserId));
                     Subscribe(observer.Value);
                 }
             }
@@ -65,19 +61,19 @@ public class WalletServiceClient : BaseClient, IObservable<string>
     
     public IDisposable Subscribe(IObserver<string> observer)
     {
-        observers.TryAdd(observer.GetType().Name, observer);
+        Observers.TryAdd(observer.GetType().Name, observer);
        
         return null;
     }
     
     public void Detach(IObserver<string> observer)
     {
-        observers.Remove(observer.GetType().Name, out observer);
+        Observers.Remove(observer.GetType().Name, out observer);
     }
     
     public void NotifyAllObservers(string id)
     {
-        foreach (var observer in observers)
+        foreach (var observer in Observers)
         {
             observer.Value.OnNext(id);
         }

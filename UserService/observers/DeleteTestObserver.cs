@@ -14,11 +14,11 @@ public class DeleteTestObserver : BaseObserver, IObserver<string>
 
     public void OnNext(string id)
     {
-        _listOfIds.Remove(id, out id);
+        ListOfIds.Remove(id, out id);
     }
     
     public IDictionary<string, string> GetAllIds()
     {
-        return _listOfIds;
+        return ListOfIds;
     }
 }

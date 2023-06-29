@@ -16,11 +16,11 @@ public class TestDataObserver : BaseObserver, IObserver<string>
 
     public void OnNext(string id)
     {
-        _listOfIds.TryAdd(id, id);
+        ListOfIds.TryAdd(id, id);
     }
 
     public IDictionary<string, string> GetAllIds()
     {
-        return _listOfIds;
+        return ListOfIds;
     }
 }

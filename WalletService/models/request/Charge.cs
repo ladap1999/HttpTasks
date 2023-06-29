@@ -2,6 +2,6 @@
 
 public class Charge
 {
-    public int userId;
-    public double amount;
+    public int UserId;
+    public double Amount;
 }

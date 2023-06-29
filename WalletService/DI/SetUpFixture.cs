@@ -11,7 +11,7 @@ using WalletService.Clients;
 namespace WalletService.DI
 {
     [Binding]
-    internal class SetUp
+    internal class SetUpFixture
     {
         private static IContainer _container;
         private static TestDataObserver _testDataObserver;
@@ -31,11 +31,6 @@ namespace WalletService.DI
         {
             _container = ScenarioDependencies().Build();
 
-            /*_observerForTransaction = new TransactionTestObserver();
-            _observer = new TestDataObserver();
-            WalletServiceClient.Instance.Subscribe(_observerForTransaction);
-            UserServiceClient.Instance.Subscribe(_observer);*/
-
             var userClient = _container.Resolve<UserServiceClient>();
             var walletServiceClient = _container.Resolve<WalletServiceClient>();
 
@@ -46,7 +41,6 @@ namespace WalletService.DI
         [AfterTestRun]
         public static async Task AfterScenario()
         {
-            //var transactionObserver = WalletServiceClient.GetObservers();
             var tasks = _container.Resolve<TransactionTestObserver>().GetAllIds()
                 .Select(id => _container.Resolve<UserServiceClient>().DeleteUser(Convert.ToInt32(id.Value)));
 

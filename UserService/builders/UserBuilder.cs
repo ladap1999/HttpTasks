@@ -11,19 +11,19 @@ public class UserBuilder
         _userRequestModel = user;
     }
 
-    public UserBuilder firstName(string name)
+    public UserBuilder FirstName(string name)
     {
         _userRequestModel.FirstName = name;
         return this;
     }
 
-    public UserBuilder lastName(string lastName)
+    public UserBuilder LastName(string lastName)
     {
         _userRequestModel.LastName = lastName;
         return this;
     }
 
-    public RegisterUser build()
+    public RegisterUser Build()
     {
         return _userRequestModel;
     }

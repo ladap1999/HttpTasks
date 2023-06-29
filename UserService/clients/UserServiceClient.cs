@@ -8,9 +8,7 @@ namespace UserService.Clients;
 public class UserServiceClient : BaseClient, IObservable<string>
 {
     private readonly HttpClient _client = new HttpClient();
-    /*private static  readonly Lazy<UserServiceClient> _instance = new Lazy<UserServiceClient>(() => new UserServiceClient());
-    
-    public static UserServiceClient Instance => _instance.Value;*/
+  
     public async Task<HttpResponseMessage> RegisterUser(object request)
     {
         var httpRequestMessage = new HttpRequestMessage
@@ -23,7 +21,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(httpRequestMessage);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in observers)
+            foreach (var observer in Observers)
             {
                 if (observer.Value.GetType().Name == "DeleteTestObserver")
                 {
@@ -55,7 +53,7 @@ public class UserServiceClient : BaseClient, IObservable<string>
         HttpResponseMessage response = await _client.SendAsync(deleteUserRequest);
         if (response.IsSuccessStatusCode)
         {
-            foreach (var observer in observers)
+            foreach (var observer in Observers)
             {
                 if (observer.Value.GetType().Name == "TestDataObserver")
                 {
@@ -101,19 +99,19 @@ public class UserServiceClient : BaseClient, IObservable<string>
 
     public IDisposable Subscribe(IObserver<string> observer)
     {
-       observers.TryAdd(observer.GetType().Name, observer);
+       Observers.TryAdd(observer.GetType().Name, observer);
        
        return null;
     }
     
     public void Detach(IObserver<string> observer)
     {
-       observers.Remove(observer.GetType().Name, out observer);
+       Observers.Remove(observer.GetType().Name, out observer);
     }
     
     public void NotifyAllObservers(string id)
     {
-        foreach (var observer in observers)
+        foreach (var observer in Observers)
         {
             observer.Value.OnNext(id);
         }

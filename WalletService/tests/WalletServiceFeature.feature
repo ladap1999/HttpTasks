@@ -1,7 +1,7 @@
 ﻿Feature: WalletServiceFeature
 
 	As a user
-    In order to create/delete users in user service
+    In order to charge/revert transaction wallet service
     I want to validate API requests/responses
 
 #TCs: 1,2

@@ -11,19 +11,19 @@ public class ChargeBuilder
         _chargeRequestModel = charge;
     }
 
-    public ChargeBuilder userId(int id)
+    public ChargeBuilder UserId(int id)
     {
-        _chargeRequestModel.userId = id;
+        _chargeRequestModel.UserId = id;
         return this;
     }
 
-    public ChargeBuilder amount(double amount)
+    public ChargeBuilder Amount(double amount)
     {
-        _chargeRequestModel.amount = amount;
+        _chargeRequestModel.Amount = amount;
         return this;
     }
 
-    public Charge build()
+    public Charge Build()
     {
         return _chargeRequestModel;
     }

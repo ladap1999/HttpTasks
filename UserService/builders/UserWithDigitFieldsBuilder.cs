@@ -11,19 +11,19 @@ public class UserWithDigitFieldsBuilder
         _userWithDigitRequestModel = user;
     }
 
-    public UserWithDigitFieldsBuilder firstName(int name)
+    public UserWithDigitFieldsBuilder FirstName(int name)
     {
         _userWithDigitRequestModel.FirstName = name;
         return this;
     }
 
-    public UserWithDigitFieldsBuilder lastName(int lastName)
+    public UserWithDigitFieldsBuilder LastName(int lastName)
     {
         _userWithDigitRequestModel.LastName = lastName;
         return this;
     }
 
-    public RegisterUserWithDigitFields build()
+    public RegisterUserWithDigitFields Build()
     {
         return _userWithDigitRequestModel;
     }
