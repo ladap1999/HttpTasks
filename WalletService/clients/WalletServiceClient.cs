@@ -9,10 +9,11 @@ namespace WalletService.Clients;
 public class WalletServiceClient : BaseClient, IObservable<string>
 {
     private readonly HttpClient _client = new HttpClient();
-    private static  readonly Lazy<WalletServiceClient> _instance = new Lazy<WalletServiceClient>(() => new WalletServiceClient());
+    /*private static  readonly Lazy<WalletServiceClient> _instance = new Lazy<WalletServiceClient>(() => new WalletServiceClient());
     
     public static WalletServiceClient Instance => _instance.Value;
-    
+   // private WalletServiceClient _walletService;*/
+
     public async Task<HttpResponseMessage> GetBalance(int id)
     {
         var getBalanceRequest = new HttpRequestMessage

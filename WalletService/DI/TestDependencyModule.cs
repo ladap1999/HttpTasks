@@ -21,7 +21,7 @@ namespace WalletService.DI
         {
             builder.RegisterType<WalletServiceClient>()
                 .AsSelf()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<WalletServiceSteps>()
                 .AsSelf();
@@ -41,7 +41,7 @@ namespace WalletService.DI
                 .AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<UserServiceClient>()
-                .AsSelf().SingleInstance();
+                .AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<UserSteps>()
                 .AsSelf();

@@ -3,7 +3,6 @@ using System.Net;
 using TechTalk.SpecFlow;
 using UserService.Extensions;
 using UserService.Steps;
-using WalletService.Clients;
 
 namespace WalletService.Steps
 {

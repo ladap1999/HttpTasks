@@ -52,9 +52,9 @@ namespace WalletService.Steps
             }
 
             var charge = new ChargeBuilder(new Charge())
-                .userId((int)_context["responseId"])
-                .amount(amountOfMoney)
-                .build();
+                .UserId((int)_context["responseId"])
+                .Amount(amountOfMoney)
+                .Build();
             _context["response"] = await _walletService.Charge(charge);
         }
 
@@ -63,9 +63,9 @@ namespace WalletService.Steps
         {
             var id = int.MaxValue;
             var charge = new ChargeBuilder(new Charge())
-                .userId(id)
-                .amount(amountOfMoney)
-                .build();
+                .UserId(id)
+                .Amount(amountOfMoney)
+                .Build();
 
             _context["response"] = await _walletService.Charge(charge);
         }
@@ -78,7 +78,7 @@ namespace WalletService.Steps
         }
 
         [When(@"Make reverts transaction with icorrect id")]
-        public async Task WhenMakeRevertsTransactionWithIcorrectId()
+        public async Task WhenMakeRevertsTransactionWithIncorrectId()
         {
             _context["transactionId"] = new Guid().ToString();
             _context["responseTransaction"] = await _walletService.RevertTransaction((string)_context["transactionId"]);

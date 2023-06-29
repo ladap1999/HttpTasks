@@ -16,6 +16,7 @@ namespace WalletService.DI
         private static IContainer _container;
         private static TestDataObserver _testDataObserver;
         private static TransactionTestObserver _transactionTestObserver;
+        private static WalletServiceClient _walletServiceClient;
 
         [ScenarioDependencies]
         public static ContainerBuilder ScenarioDependencies()
@@ -36,15 +37,16 @@ namespace WalletService.DI
             UserServiceClient.Instance.Subscribe(_observer);*/
 
             var userClient = _container.Resolve<UserServiceClient>();
-            var walletClient = _container.Resolve<WalletServiceClient>();
+            var walletServiceClient = _container.Resolve<WalletServiceClient>();
 
-            walletClient.Subscribe(_container.Resolve<TransactionTestObserver>());
+            walletServiceClient.Subscribe(_container.Resolve<TransactionTestObserver>());
             userClient.Subscribe(_container.Resolve<TestDataObserver>());
         }
 
         [AfterTestRun]
         public static async Task AfterScenario()
         {
+            //var transactionObserver = WalletServiceClient.GetObservers();
             var tasks = _container.Resolve<TransactionTestObserver>().GetAllIds()
                 .Select(id => _container.Resolve<UserServiceClient>().DeleteUser(Convert.ToInt32(id.Value)));
 

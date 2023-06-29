@@ -26,7 +26,7 @@ namespace UserService.DI
 
             var client = _container.Resolve<UserServiceClient>();
             client.Subscribe(_container.Resolve<TestDataObserver>());
-            client.Subscribe(_container.Resolve< DeleteTestObserver>());
+            client.Subscribe(_container.Resolve<DeleteTestObserver>());
         }
 
         [AfterTestRun]

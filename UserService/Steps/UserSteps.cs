@@ -24,9 +24,9 @@ public class UserSteps
     public async Task GivenNewUserWithFirstNameAndLastName(string firstName, string lastName)
     { 
         RegisterUser user = new UserBuilder(new RegisterUser())
-        .firstName(firstName)
-        .lastName(lastName)
-        .build();
+        .FirstName(firstName)
+        .LastName(lastName)
+        .Build();
 
         var response = await _userServiceClient.RegisterUser(user);
         _context["response"] = response;
@@ -36,9 +36,9 @@ public class UserSteps
     public async Task GivenNewUserWithDigitFirstNameAndDigitLastNameWasCreated(int firstName, int lastName)
     {
         RegisterUserWithDigitFields user = new UserWithDigitFieldsBuilder(new RegisterUserWithDigitFields())
-            .firstName(firstName)
-            .lastName(lastName)
-            .build();
+            .FirstName(firstName)
+            .LastName(lastName)
+            .Build();
 
         var response = await _userServiceClient.RegisterUser(user);
         _context["response"] = response;
@@ -52,9 +52,9 @@ public class UserSteps
         foreach (var element in usersList)
         {
             var user = new UserBuilder(new RegisterUser())
-                .firstName(element.Item1)
-                .lastName(element.Item2)
-                .build();
+                .FirstName(element.Item1)
+                .LastName(element.Item2)
+                .Build();
            responsesList.Add(await _userServiceClient.RegisterUser(user));
         }
         _context["responses"] = responsesList;
@@ -78,9 +78,9 @@ public class UserSteps
         await _userServiceClient.DeleteUser(firstResponse.GetId());
 
         RegisterUser user = new UserBuilder(new RegisterUser())
-            .firstName(firstName)
-            .lastName(lastName)
-            .build();
+            .FirstName(firstName)
+            .LastName(lastName)
+            .Build();
         
         responsesList.Add(await _userServiceClient.RegisterUser(user));
         _context["responses"] = responsesList;

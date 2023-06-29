@@ -8,9 +8,9 @@ namespace UserService.Clients;
 public class UserServiceClient : BaseClient, IObservable<string>
 {
     private readonly HttpClient _client = new HttpClient();
-    private static  readonly Lazy<UserServiceClient> _instance = new Lazy<UserServiceClient>(() => new UserServiceClient());
+    /*private static  readonly Lazy<UserServiceClient> _instance = new Lazy<UserServiceClient>(() => new UserServiceClient());
     
-    public static UserServiceClient Instance => _instance.Value;
+    public static UserServiceClient Instance => _instance.Value;*/
     public async Task<HttpResponseMessage> RegisterUser(object request)
     {
         var httpRequestMessage = new HttpRequestMessage

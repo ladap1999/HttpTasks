@@ -154,17 +154,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "firstName",
                             "lastName"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "Tom",
                             "Ford"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "Alex",
                             "Slow"});
 #line 28
- testRunner.Given("Users with firstName and lastName were created", ((string)(null)), table1, "Given ");
+ testRunner.Given("Users with firstName and lastName were created", ((string)(null)), table2, "Given ");
 #line hidden
 #line 32
  testRunner.Then("Second ID is bigger then the first", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -4,5 +4,5 @@ namespace UserService.Observers;
 
 public class BaseObserver
 {
-    protected static readonly ConcurrentDictionary<string, string> _listOfIds= new ConcurrentDictionary<string, string>();
+    protected static readonly ConcurrentDictionary<string, string> _listOfIds = new ConcurrentDictionary<string, string>();
 }
