@@ -42,5 +42,4 @@ namespace UserService.Steps
             Assert.True(responseUserStatus.GetBoolValue());
         }
     }
-
 }

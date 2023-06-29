@@ -12,26 +12,14 @@ namespace UserService.Steps;
 public class UserSteps
 {
 
-    private readonly UserServiceClient _userServiceClient = UserServiceClient.Instance;
+    private readonly UserServiceClient _userServiceClient;
     private ScenarioContext _context;
-    public UserSteps(ScenarioContext context)
+    public UserSteps(ScenarioContext context, UserServiceClient userService)
     {
         _context = context;
+        _userServiceClient = userService;
     }
-
-    [BeforeScenario]
-    public void BeforeScenario()
-    {
-        //TODO: implement logic that has to run before executing each scenario
-    }
-
-    [AfterScenario]
-    public void AfterScenario()
-    {
-        //TODO: implement logic that has to run after executing each scenario
-    }
-
-
+    
     [Given(@"New user with firstName (.*) and lastName (.*) was created")]
     public async Task GivenNewUserWithFirstNameAndLastName(string firstName, string lastName)
     { 
@@ -56,8 +44,6 @@ public class UserSteps
         _context["response"] = response;
     }
 
-
-
     [Given(@"Users with firstName and lastName were created")]
     public async Task GivenUsersWithFirstNameAndLastNameWereCreated(Table table)
     {
@@ -74,7 +60,6 @@ public class UserSteps
         _context["responses"] = responsesList;
     }
 
-
     [When(@"User with non existed Id is deleted")]
     public async Task WhenUserWithNonExistedIdIsDeleted()
     {
@@ -82,7 +67,6 @@ public class UserSteps
         var response = await _userServiceClient.DeleteUser(id);
         _context["response"] = response;
     }
-
 
     [When(@"The first user is deleted and new user with firstName '(.*)' and lastName '(.*)' is created")]
     public async Task WhenTheFirstUserWasDeletedAndNewUserWithFirstNameAndLastNameIsCreated(string firstName, string lastName)

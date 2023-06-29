@@ -11,7 +11,7 @@ namespace WalletService.Steps
     public sealed class WalletServiceAsserts : UserServiceAsserts
     {
         private readonly ScenarioContext _context;
-        private WalletServiceClient _walletService = new WalletServiceClient();
+       
         public WalletServiceAsserts(ScenarioContext context) : base(context)
         {
             _context = context;
@@ -52,5 +52,4 @@ namespace WalletService.Steps
                 Is.EqualTo(message));
         }
     }
-
 }

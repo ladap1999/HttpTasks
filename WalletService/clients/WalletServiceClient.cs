@@ -6,7 +6,7 @@ using WalletService.Utils;
 
 namespace WalletService.Clients;
 
-public class WalletServiceClient : BaseClient,IObservable<string>
+public class WalletServiceClient : BaseClient, IObservable<string>
 {
     private readonly HttpClient _client = new HttpClient();
     private static  readonly Lazy<WalletServiceClient> _instance = new Lazy<WalletServiceClient>(() => new WalletServiceClient());
